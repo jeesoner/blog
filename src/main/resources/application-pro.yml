@@ -16,4 +16,4 @@ logging:
     root: info
     com.cijee: debug
   file:
-    path: log/blog.log
+    path: log/blog-pro
