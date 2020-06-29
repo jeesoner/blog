@@ -1,8 +1,6 @@
 package com.cijee.blog.exception;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.lang.NonNull;
-import org.springframework.lang.Nullable;
 
 /**
  * @author cijee
@@ -28,14 +26,12 @@ public abstract class AbstractBlogException extends RuntimeException{
      *
      * @return {@link HttpStatus}
      */
-    @NonNull
     public abstract HttpStatus getHttpStatus();
 
-    public void setErrorData(@NonNull Object errorData) {
+    public void setErrorData(Object errorData) {
         this.errorData = errorData;
     }
 
-    @Nullable
     public Object getErrorData() {
         return errorData;
     }
