@@ -1,10 +1,419 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common :: head(~{::title})">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>首页</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
+    <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}">
+    <link rel="stylesheet" href="../static/css/animate.css" th:href="@{/css/animate.css}">
 </head>
 <body>
-<h1>首页</h1>
+<!--导航-->
+<nav th:replace="common :: menu" class="ui inverted attached segment m-padded-tb-mini m-shadow-small animated fadeInDownBig">
+    <div class="ui container">
+        <div class="ui inverted stackable secondary menu">
+            <h2 class="ui teal header item">Blog</h2>
+            <a href="#" class="m-item item m-mobile-hide"><i class="fort awesome icon"></i>首页</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="list ul icon"></i>分类</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="tags icon"></i>标签</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="archive icon"></i>归档</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="info icon"></i>关于</a>
+            <div class="right m-item item m-mobile-hide m-padded-tb-big">
+                <div class="ui icon inverted transparent input">
+                    <input type="text" placeholder="搜索"/>
+                    <i class="search link icon"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a class="ui menu toggle icon black button m-left-top m-mobile-show">
+        <i class="sidebar icon"></i>
+    </a>
+</nav>
+<!--中间-->
+<div class="m-padded-tb-large">
+    <div class="ui container m-padded-tb-big">
+        <div class="ui grid stackable">
+            <!--文章-->
+            <div class="eleven wide column">
+                <!--文章header-->
+                <div class="ui top attached segment animated fadeInLeftBig">
+                    <!--两列-->
+                    <div class="ui middle aligned two column grid">
+                        <div class="column">
+                            <h3 class="ui teal header">博客</h3>
+                        </div>
+                        <div class="right aligned column">
+                            共<h3 class="ui orange header m-text-thin m-inline-block">14</h3>篇
+                        </div>
+                    </div>
+                </div>
+                <!--content-->
+                <div class="ui attached segment animated fadeInLeftBig">
+                    <div class="ui vertical segment m-padded m-padded-tb-big">
+                        <div class="ui stackable mobile reversed grid">
+                            <div class="eleven wide column">
+                                <div class="ui header">教你搭一个博客</div>
+                                <p class="m-text">
+                                    大三快结束了，想做个面试的项目，于是就有了写博客网站的想法。大三快结束了，想做个面试的项目，于是就有了写博客网站的想法。
+                                    大三快结束了，想做个面试的项目，于是就有了写博客网站的想法
+                                </p>
+                                <div class="ui stackable grid">
+                                    <div class="eleven wide column">
+                                        <!--个人信息-->
+                                        <div class="ui horizontal mini link list">
+                                            <div class="item">
+                                                <img src="../static/images/avatar.jpg" th:src="@{/images/avatar.jpg}" alt="" class="ui avatar image">
+                                                <div class="content">
+                                                    <a href="#" class="header">樱花</a>
+                                                </div>
+                                            </div>
+                                            <div class="item">
+                                                <i class="calendar icon"></i> 2020-6-1
+                                            </div>
+                                            <div class="item">
+                                                <i class="eye icon"></i> 520
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="right aligned five wide column">
+                                        <a href="#" target="_blank" class="ui teal basic label m-padded-tiny">项目项目</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="five wide column">
+                                <a href="#" target="_blank">
+                                    <!--图片800*450-->
+                                    <img src="https://picsum.photos/id/1047/800/450" alt="" class="ui rounded image">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui vertical segment m-padded m-padded-tb-big">
+                        <div class="ui stackable mobile reversed grid">
+                            <div class="eleven wide column">
+                                <div class="ui header">教你搭一个博客</div>
+                                <p class="m-text">
+                                    大三快结束了，想做个面试的项目，于是就有了写博客网站的想法。大三快结束了，想做个面试的项目，于是就有了写博客网站的想法。
+                                    大三快结束了，想做个面试的项目，于是就有了写博客网站的想法
+                                </p>
+                                <div class="ui stackable grid">
+                                    <div class="eleven wide column">
+                                        <!--个人信息-->
+                                        <div class="ui horizontal mini link list">
+                                            <div class="item">
+                                                <img src="../static/images/avatar.jpg" th:src="@{/images/avatar.jpg}" alt="" class="ui avatar image">
+                                                <div class="content">
+                                                    <a href="#" class="header">樱花</a>
+                                                </div>
+                                            </div>
+                                            <div class="item">
+                                                <i class="calendar icon"></i> 2020-6-1
+                                            </div>
+                                            <div class="item">
+                                                <i class="eye icon"></i> 520
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="right aligned five wide column">
+                                        <a href="#" target="_blank" class="ui teal basic label m-padded-tiny">项目项目</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="five wide column">
+                                <a href="#" target="_blank">
+                                    <!--图片800*450-->
+                                    <img src="https://picsum.photos/id/1047/800/450" alt="" class="ui rounded image">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui vertical segment m-padded m-padded-tb-big">
+                        <div class="ui stackable mobile reversed grid">
+                            <div class="eleven wide column">
+                                <div class="ui header">教你搭一个博客</div>
+                                <p class="m-text">
+                                    大三快结束了，想做个面试的项目，于是就有了写博客网站的想法。大三快结束了，想做个面试的项目，于是就有了写博客网站的想法。
+                                    大三快结束了，想做个面试的项目，于是就有了写博客网站的想法
+                                </p>
+                                <div class="ui stackable grid">
+                                    <div class="eleven wide column">
+                                        <!--个人信息-->
+                                        <div class="ui horizontal mini link list">
+                                            <div class="item">
+                                                <img src="../static/images/avatar.jpg" th:src="@{/images/avatar.jpg}" alt="" class="ui avatar image">
+                                                <div class="content">
+                                                    <a href="#" class="header">樱花</a>
+                                                </div>
+                                            </div>
+                                            <div class="item">
+                                                <i class="calendar icon"></i> 2020-6-1
+                                            </div>
+                                            <div class="item">
+                                                <i class="eye icon"></i> 520
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="right aligned five wide column">
+                                        <a href="#" target="_blank" class="ui teal basic label m-padded-tiny">项目项目</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="five wide column">
+                                <a href="#" target="_blank">
+                                    <!--图片800*450-->
+                                    <img src="https://picsum.photos/id/1047/800/450" alt="" class="ui rounded image">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui vertical segment m-padded m-padded-tb-big">
+                        <div class="ui stackable mobile reversed grid">
+                            <div class="eleven wide column">
+                                <div class="ui header">教你搭一个博客</div>
+                                <p class="m-text">
+                                    大三快结束了，想做个面试的项目，于是就有了写博客网站的想法。大三快结束了，想做个面试的项目，于是就有了写博客网站的想法。
+                                    大三快结束了，想做个面试的项目，于是就有了写博客网站的想法
+                                </p>
+                                <div class="ui stackable grid">
+                                    <div class="eleven wide column">
+                                        <!--个人信息-->
+                                        <div class="ui horizontal mini link list">
+                                            <div class="item">
+                                                <img src="../static/images/avatar.jpg" th:src="@{/images/avatar.jpg}" alt="" class="ui avatar image">
+                                                <div class="content">
+                                                    <a href="#" class="header">樱花</a>
+                                                </div>
+                                            </div>
+                                            <div class="item">
+                                                <i class="calendar icon"></i> 2020-6-1
+                                            </div>
+                                            <div class="item">
+                                                <i class="eye icon"></i> 520
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="right aligned five wide column">
+                                        <a href="#" target="_blank" class="ui teal basic label m-padded-tiny">项目项目</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="five wide column">
+                                <a href="#" target="_blank">
+                                    <!--图片800*450-->
+                                    <img src="https://picsum.photos/id/1047/800/450" alt="" class="ui rounded image">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui vertical segment m-padded m-padded-tb-big">
+                        <div class="ui stackable mobile reversed grid">
+                            <div class="eleven wide column">
+                                <div class="ui header">教你搭一个博客</div>
+                                <p class="m-text">
+                                    大三快结束了，想做个面试的项目，于是就有了写博客网站的想法。大三快结束了，想做个面试的项目，于是就有了写博客网站的想法。
+                                    大三快结束了，想做个面试的项目，于是就有了写博客网站的想法
+                                </p>
+                                <div class="ui stackable grid">
+                                    <div class="eleven wide column">
+                                        <!--个人信息-->
+                                        <div class="ui horizontal mini link list">
+                                            <div class="item">
+                                                <img src="../static/images/avatar.jpg" th:src="@{/images/avatar.jpg}" alt="" class="ui avatar image">
+                                                <div class="content">
+                                                    <a href="#" class="header">樱花</a>
+                                                </div>
+                                            </div>
+                                            <div class="item">
+                                                <i class="calendar icon"></i> 2020-6-1
+                                            </div>
+                                            <div class="item">
+                                                <i class="eye icon"></i> 520
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="right aligned five wide column">
+                                        <a href="#" target="_blank" class="ui teal basic label m-padded-tiny">项目项目</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="five wide column">
+                                <a href="#" target="_blank">
+                                    <!--图片800*450-->
+                                    <img src="https://picsum.photos/id/1047/800/450" alt="" class="ui rounded image">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--分页-->
+                <div class="ui bottom attached segment animated fadeInLeftBig">
+                    <div class="ui middle aligned two column grid">
+                        <div class="column">
+                            <a class="ui animated button" tabindex="0">
+                                <div class="visible content">上一页</div>
+                                <div class="hidden content">
+                                    <i class="left arrow icon"></i>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="right aligned column">
+                            <a class="ui animated button" tabindex="0">
+                                <div class="visible content">下一页</div>
+                                <div class="hidden content">
+                                    <i class="right arrow icon"></i>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--右边边栏-->
+            <div class="five wide column">
+                <!--分类-->
+                <div class="ui segments animated fadeInRightBig">
+                    <div class="ui secondary segment">
+                        <div class="ui two column grid">
+                            <div class="column">
+                                <i class="list icon"></i>分类
+                            </div>
+                            <div class="right aligned column">
+                                <a href="#">more <i class="angle right icon"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui segment teal ">
+                        <div class="ui fluid vertical menu">
+                            <a href="#" class="item">
+                                文章
+                                <div class="ui teal basic left pointing label">13</div>
+                            </a>
+                            <a href="#" class="item">
+                                笔记
+                                <div class="ui teal basic left pointing label">13</div>
+                            </a>
+                            <a href="#" class="item">
+                                想法
+                                <div class="ui teal basic left pointing label">13</div>
+                            </a>
+                            <a href="#" class="item">
+                                极客
+                                <div class="ui teal basic left pointing label">13</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!--标签-->
+                <div class="ui segments m-margin-top-large animated fadeInRightBig">
+                    <div class="ui secondary segment">
+                        <div class="ui two column grid">
+                            <div class="column">
+                                <i class="tags icon"></i>标签
+                            </div>
+                            <div class="right aligned column">
+                                <a href="#">more <i class="angle right icon"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui segment teal">
+                        <a href="#" class="ui basic teal left pointing label m-margin-tb-tiny">
+                            Java <div class="detail">13</div>
+                        </a>
+                        <a href="#" class="ui basic teal left pointing label m-margin-tb-tiny">
+                            算法 <div class="detail">13</div>
+                        </a>
+                        <a href="#" class="ui basic teal left pointing label m-margin-tb-tiny">
+                            操作系统 <div class="detail">13</div>
+                        </a>
+                        <a href="#" class="ui basic teal left pointing label m-margin-tb-tiny">
+                            思考 <div class="detail">13</div>
+                        </a>
+                        <a href="#" class="ui basic teal left pointing label m-margin-tb-tiny">
+                            学习方法 <div class="detail">13</div>
+                        </a>
+                    </div>
+                </div>
+                <!--最新推荐-->
+                <div class="ui segments m-black m-margin-top-large animated fadeInRightBig">
+                    <div class="ui secondary segment">
+                        <i class="bookmark icon"></i>最新推荐
+                    </div>
+                    <div class="ui segment">
+                        <a href="#" target="_blank" class="m-black">我的第一篇博客</a>
+                    </div>
+                    <div class="ui segment">
+                        <a href="#" target="_blank" class="m-black">我的第一篇博客</a>
+                    </div>
+                    <div class="ui segment">
+                        <a href="#" target="_blank" class="m-black">我的第一篇博客</a>
+                    </div>
+                </div>
+                <!--二维码-->
+                <h4 class="ui horizontal divider header animated fadeInRightBig">扫码关注我</h4>
+                <div class="ui centered card animated fadeInRightBig" style="width: 11em">
+                    <img src="../static/images/wechat.jpg" th:src="@{/images/wechat.jpg}" alt="" class="ui rounded image">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--底部-->
+<footer th:replace="common :: footer" class="ui inverted vertical segment m-padded-tb-big">
+    <!--信息-->
+    <div class="ui center aligned container">
+        <div class="ui inverted divided stackable grid">
+            <!--weChat-->
+            <div class="three wide column">
+                <div class="ui inverted list">
+                    <div class="item">
+                        <img src="../static/images/wechat.jpg" th:src="@{/images/wechat.jpg}" class="ui image rounded" alt="" style="width: 110px">
+                    </div>
+                </div>
+            </div>
+            <!--最新博客-->
+            <div class="three wide column m-text-thin m-text-space m-opacity-mini">
+                <h4 class="ui inverted header">最新博客</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item">我的第一篇博客</a>
+                    <a href="#" class="item">我的第一篇博客</a>
+                    <a href="#" class="item">我的第一篇博客</a>
+                </div>
+            </div>
+            <!--联系我-->
+            <div class="three wide column m-text-thin m-text-space m-opacity-mini">
+                <h4 class="ui inverted header">联系我</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item">Email: xxxxx@xxx.com</a>
+                </div>
+            </div>
+            <!--关于我-->
+            <div class="seven wide column m-text-thin m-text-space m-opacity-mini">
+                <h4 class="ui inverted header">cijee</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item">思考人生</a>
+                </div>
+            </div>
+        </div>
+        <div class="ui inverted section divider"></div>
+        <!--版权所有-->
+        <p class="m-text-thin m-text-space m-opacity-tiny">Copyright © 2020 Blog designed by cijee</p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+
+<script>
+    $('.menu.toggle').click(function () {
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+    $('#choose').dropdown({
+        on: 'hover',
+        allowCategorySelection: true
+    });
+</script>
 </body>
 </html>

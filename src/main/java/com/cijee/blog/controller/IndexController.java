@@ -13,9 +13,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class IndexController {
 
-    @GetMapping("/{id}/{name}")
-    public String index(@PathVariable Integer id, @PathVariable String name) {
-        System.out.println(id + name);
+    @GetMapping("/")
+    public String index() {
         return "index";
+    }
+
+    @GetMapping("/types")
+    public String types() {
+        return "types";
     }
 }

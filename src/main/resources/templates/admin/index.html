@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="admin/common :: head(~{::title})">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>博客后台</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="../../static/css/me.css">
+</head>
+<body>
+<!--导航-->
+<nav th:replace="admin/common :: menu" class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
+    <div class="ui container">
+        <div class="ui inverted stackable secondary menu">
+            <h2 class="ui teal header item">博客后台</h2>
+            <a href="#" class="m-item item m-mobile-hide"><i class="fort awesome icon"></i>文章</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="list ul icon"></i>分类</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="tags icon"></i>标签</a>
+            <div class="right menu m-mobile-hide m-item">
+                <div class="ui dropdown item">
+                    <div class="text">
+                        <img src="../../static/images/avatar.jpg" alt="" class="ui avatar image">
+                        <span></span>
+                    </div>
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a class="item">注销</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a class="ui menu toggle icon black button m-left-top m-mobile-show">
+        <i class="sidebar icon"></i>
+    </a>
+</nav>
+
+<!--所有文章-->
+<div class="m-padded-tb-large m-container-small">
+    <div class="ui container">
+        <div class="ui success large message">
+            <h2>Hi <span th:text="${session.user.username}"></span>,</h2>
+            <p>欢迎登录！</p>
+        </div>
+        <img src="https://w.wallhaven.cc/full/zm/wallhaven-zmm7mw.png" alt="" class="ui rounded bordered fluid image">
+    </div>
+</div>
+
+<!--底部-->
+<footer th:replace="admin/common :: footer" class="m-padded-tb-big m-container" style="text-align: center;">
+    <!--版权所有-->
+    <p class="m-text-thin m-text-space m-opacity-tiny">Copyright © 2020 Blog designed by cijee</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+
+<script>
+    $('.menu.toggle').click(function () {
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+    $('.ui.dropdown').dropdown({
+        on: 'hover'
+    });
+</script>
+</body>
+</html>
