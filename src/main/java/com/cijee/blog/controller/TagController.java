@@ -8,10 +8,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -31,9 +28,9 @@ public class TagController {
     }
 
     @GetMapping("/tags")
-    public String tags(Integer page, Integer size, Model model) {
-        if (page == null) page = 0;
-        if (size == null) size = 10;
+    public String tags(@RequestParam(defaultValue = "0", required = false) Integer page,
+                       @RequestParam(defaultValue = "10", required = false) Integer size,
+                       Model model) {
         Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.ASC, "id"));
         model.addAttribute("page", tagService.listTag(pageable));
         return "admin/tags";

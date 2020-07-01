@@ -17,7 +17,7 @@ import java.util.List;
 public class Type {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotBlank(message = "数据验证错误")
     private String name;

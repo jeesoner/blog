@@ -4,6 +4,8 @@ import com.cijee.blog.model.po.Type;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 /**
  * @author cijee
  * @date 2020/6/28
@@ -57,4 +59,6 @@ public interface TypeService {
      * @param id 主键
      */
     void removeType(Long id);
+
+    List<Type> listType();
 }

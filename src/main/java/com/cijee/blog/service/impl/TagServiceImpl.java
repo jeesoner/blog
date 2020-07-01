@@ -9,6 +9,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * @author cijee
@@ -18,7 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class TagServiceImpl implements TagService {
     
-    private TagRepository tagRepository;
+    private final TagRepository tagRepository;
 
     public TagServiceImpl(TagRepository tagRepository) {
         this.tagRepository = tagRepository;
@@ -46,10 +51,32 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
+    public List<Tag> listTag() {
+        return tagRepository.findAll();
+    }
+
+    @Override
+    public List<Tag> listTag(String ids) {
+        List<Tag> tags = tagRepository.findAllById(coverToList(ids));
+        return tags;
+    }
+
+    private List<Long> coverToList(String ids) {
+        List<Long> list = new ArrayList<>();
+        if (!StringUtils.isEmpty(ids)) {
+            String[] idArray = ids.split(",");
+            for (String id : idArray) {
+                list.add(new Long(id));
+            }
+        }
+        return list;
+    }
+
+    @Override
     public Tag updateTag(Long id, Tag tag) {
         Tag t = tagRepository.findById(id).get();
         if (t == null) {
-            throw new NotFoundException("不存在该类型");
+            throw new NotFoundException("该标签不存在");
         }
         BeanUtils.copyProperties(tag, t);
         return tagRepository.save(t);

@@ -1,8 +1,23 @@
 package com.cijee.blog.controller;
 
+import com.cijee.blog.model.param.BlogParam;
+import com.cijee.blog.model.po.Blog;
+import com.cijee.blog.model.po.Tag;
+import com.cijee.blog.model.po.Type;
+import com.cijee.blog.model.po.User;
+import com.cijee.blog.service.BlogService;
+import com.cijee.blog.service.TagService;
+import com.cijee.blog.service.TypeService;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * @author cijee
@@ -12,8 +27,85 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/admin")
 public class BlogController {
 
+    private static final String WRITE = "admin/write";
+    private static final String LIST = "admin/blogs";
+    private static final String REDIRECT_LIST = "redirect:/admin/blogs";
+
+    private final BlogService blogService;
+    private final TypeService typeService;
+    private final TagService tagService;
+
+    public BlogController(BlogService blogService, TypeService typeService, TagService tagService) {
+        this.blogService = blogService;
+        this.typeService = typeService;
+        this.tagService = tagService;
+    }
+
     @GetMapping("/blogs")
-    public String blogs() {
-        return "admin/blogs";
+    public String blogs(@RequestParam(defaultValue = "0", required = false) Integer page,
+                        @RequestParam(defaultValue = "10", required = false) Integer size,
+                        BlogParam blogParam, Model model) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.ASC, "id"));
+        model.addAttribute("page", blogService.listBlog(pageable, blogParam));
+        model.addAttribute("types", typeService.listType());
+        return LIST;
+    }
+
+    /**
+     * 博客搜索
+     *
+     * @param page 页码
+     * @param size 页大小
+     * @param blog 参数
+     * @param model model
+     * @return 返回给blogList数据
+     */
+    @PostMapping("/blogs/search")
+    public String search(@RequestParam(defaultValue = "0", required = false) Integer page,
+                         @RequestParam(defaultValue = "10", required = false) Integer size,
+                         BlogParam blog, Model model) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.ASC, "id"));
+        model.addAttribute("page", blogService.listBlog(pageable, blog));
+        return "admin/blogs :: blogList";
+    }
+
+    /**
+     * 跳转到写博客页面
+     *
+     * @param model
+     * @return
+     */
+    @GetMapping("/blogs/write")
+    public String write(Model model) {
+        model.addAttribute("types", typeService.listType());
+        model.addAttribute("tags", tagService.listTag());
+        model.addAttribute("blog", new Blog());
+        return WRITE;
+    }
+
+    @PostMapping("/blogs")
+    public String post(Blog blog, String tagIds, RedirectAttributes attributes, HttpSession session) {
+        blog.setUser((User) session.getAttribute("user"));
+        // 获取分类id
+        blog.setType(typeService.getType(blog.getType().getId()));
+        // 获取标签集
+        blog.setTags(tagService.listTag(tagIds));
+        // 保存到数据库
+        Blog b = blogService.saveBlog(blog);
+        if (b == null) {
+            attributes.addFlashAttribute("message", "操作失败");
+        } else {
+            attributes.addFlashAttribute("message", "操作成功");
+        }
+        return REDIRECT_LIST;
+    }
+
+    @GetMapping("/blogs/{id}/write")
+    public String edit(@PathVariable String id, Model model) {
+        List<Type> types = typeService.listType();
+        List<Tag> tags = tagService.listTag();
+        model.addAttribute("types", types);
+        model.addAttribute("tags", tags);
+        return WRITE;
     }
 }

@@ -20,7 +20,8 @@
             <div class="right menu m-mobile-hide m-item">
                 <div class="ui dropdown item">
                     <div class="text">
-                        <img src="../../static/images/avatar.jpg" th:src="@{/images/avatar.jpg}" alt="" class="ui avatar image">
+                        <img src="../../static/images/avatar.jpg" th:src="@{/images/avatar.jpg}" alt=""
+                             class="ui avatar image">
                         cijee
                     </div>
                     <i class="dropdown icon"></i>
@@ -35,33 +36,36 @@
         <i class="sidebar icon"></i>
     </a>
 </nav>
-<div class="ui top attached tabular menu">
-    <div class="ui container">
-        <a href="#" class="item">写博客</a>
-        <a href="#" class="item active">所有博客</a>
-    </div>
+
+<div class="ui attached pointing menu">
+    <ui class="ui container">
+        <div class="right menu">
+            <a th:href="@{/admin/blogs/write}" class="item">写博客</a>
+            <a th:href="@{/admin/blogs}" class="active teal item">博客列表</a>
+        </div>
+    </ui>
 </div>
 
 <!--所有文章-->
 <div class="m-padded-tb-large m-container-small">
     <div class="ui container">
-        <form action="#" method="post" class="ui segment form">
+        <form class="ui segment secondary form">
+            <input type="hidden" name="page">
             <div class="inline fields">
                 <div class="field">
                     <input type="text" name="title" placeholder="标题">
                 </div>
                 <div class="field">
-                    <div class="ui selection dropdown">
-                        <input type="hidden" name="type">
+                    <div id="clear-select" class="ui selection dropdown">
+                        <input type="hidden" name="typeId">
                         <i class="dropdown icon"></i>
                         <div class="default text">分类</div>
                         <div class="menu">
-                            <div class="item" data-value="1">文章</div>
-                            <div class="item" data-value="2">笔记</div>
-                            <div class="item" data-value="3">想法</div>
-                            <div class="item" data-value="4">极客</div>
+                            <div th:each="type : ${types}" class="item" th:data-value="${type.id}"
+                                 th:text="${type.name}"></div>
                         </div>
                     </div>
+                    <button type="button" id="clear-btn" class="ui button">Clear</button>
                 </div>
                 <div class="field">
                     <div class="ui checkbox">
@@ -70,146 +74,57 @@
                     </div>
                 </div>
                 <div class="field">
-                    <button class="ui teal button">搜索</button>
+                    <button type="button" id="search-btn" class="ui teal button">搜索</button>
                 </div>
             </div>
         </form>
 
-        <table class="ui celled table">
+        <table id="table-container" th:fragment="blogList" class="ui compact teal table">
             <thead class="center aligned">
-                <tr>
-                    <th></th>
-                    <th>标题</th>
-                    <th>类型</th>
-                    <th>推荐</th>
-                    <th>更新时间</th>
-                    <th>操作</th>
-                </tr>
+            <tr>
+                <th class="one wide"></th>
+                <th class="four wide">标题</th>
+                <th class="three wide">分类</th>
+                <th class="one wide">推荐</th>
+                <th class="three wide">更新时间</th>
+                <th class="one wide">状态</th>
+                <th class="three wide">操作</th>
+            </tr>
             </thead>
             <tbody class="center aligned">
-                <tr>
-                    <td>1</td>
-                    <td>我的第一篇博客</td>
-                    <td>文章</td>
-                    <td>是</td>
-                    <td>2020-06-04 09:50</td>
-                    <td>
-                        <a href="#" class="ui mini teal button">编辑</a>
-                        <a href="#" class="ui mini red button">删除</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>我的第一篇博客</td>
-                    <td>文章</td>
-                    <td>是</td>
-                    <td>2020-06-04 09:50</td>
-                    <td>
-                        <a href="#" class="ui mini teal button">编辑</a>
-                        <a href="#" class="ui mini red button">删除</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>我的第一篇博客</td>
-                    <td>文章</td>
-                    <td>是</td>
-                    <td>2020-06-04 09:50</td>
-                    <td>
-                        <a href="#" class="ui mini teal button">编辑</a>
-                        <a href="#" class="ui mini red button">删除</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>我的第一篇博客</td>
-                    <td>文章</td>
-                    <td>是</td>
-                    <td>2020-06-04 09:50</td>
-                    <td>
-                        <a href="#" class="ui mini teal button">编辑</a>
-                        <a href="#" class="ui mini red button">删除</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>我的第一篇博客</td>
-                    <td>文章</td>
-                    <td>是</td>
-                    <td>2020-06-04 09:50</td>
-                    <td>
-                        <a href="#" class="ui mini teal button">编辑</a>
-                        <a href="#" class="ui mini red button">删除</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>我的第一篇博客</td>
-                    <td>文章</td>
-                    <td>是</td>
-                    <td>2020-06-04 09:50</td>
-                    <td>
-                        <a href="#" class="ui mini teal button">编辑</a>
-                        <a href="#" class="ui mini red button">删除</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>我的第一篇博客</td>
-                    <td>文章</td>
-                    <td>是</td>
-                    <td>2020-06-04 09:50</td>
-                    <td>
-                        <a href="#" class="ui mini teal button">编辑</a>
-                        <a href="#" class="ui mini red button">删除</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>我的第一篇博客</td>
-                    <td>文章</td>
-                    <td>是</td>
-                    <td>2020-06-04 09:50</td>
-                    <td>
-                        <a href="#" class="ui mini teal button">编辑</a>
-                        <a href="#" class="ui mini red button">删除</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>我的第一篇博客</td>
-                    <td>文章</td>
-                    <td>是</td>
-                    <td>2020-06-04 09:50</td>
-                    <td>
-                        <a href="#" class="ui mini teal button">编辑</a>
-                        <a href="#" class="ui mini red button">删除</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>我的第一篇博客</td>
-                    <td>文章</td>
-                    <td>是</td>
-                    <td>2020-06-04 09:50</td>
-                    <td>
-                        <a href="#" class="ui mini teal button">编辑</a>
-                        <a href="#" class="ui mini red button">删除</a>
-                    </td>
-                </tr>
+            <tr th:each="blog, iterStat : ${page.content}">
+                <td th:text="${iterStat.count}"></td>
+                <td th:text="${blog.title}"></td>
+                <td th:text="${blog.type.name}"></td>
+                <td th:text="${blog.recommend} ? '是' : '否'">是</td>
+                <td th:text="${#dates.format(blog.createdTime, 'yyyy-MM-dd HH:mm')}"></td>
+                <td th:text="${blog.published == 0 ? '草稿' : '发布'}"></td>
+                <td>
+                    <a th:href="@{/admin/blogs/{id}/edit(id=${blog.id})}" class="ui mini teal button">编辑</a>
+                    <a th:href="@{/admin/blogs/{id}/delete(id=${blog.id})}" class="ui mini red button">删除</a>
+                </td>
+            </tr>
             </tbody>
             <tfoot>
-                <tr>
-                    <th colspan="6">
-                        <div class="ui mini pagination menu">
-                            <a href="#" class="item">上一页</a>
-                            <a href="#" class="item">下一页</a>
-                        </div>
-                        <a href="#" class="ui mini right floated teal button">新增</a>
-                    </th>
-                </tr>
+            <tr>
+                <th colspan="7">
+                    <div class="ui mini pagination menu" th:if="${page.totalPages}>1">
+                        <a onclick="page(this)" th:attr="data-page=${page.number}-1" th:unless="${page.first}"
+                           class="item">上一页</a>
+                        <a onclick="page(this)" th:attr="data-page=${page.number}+1" th:unless="${page.last}"
+                           class="item">下一页</a>
+                    </div>
+                    <a th:href="@{/admin/blogs/write}" class="ui mini right floated teal button">新增</a>
+                </th>
+            </tr>
             </tfoot>
         </table>
+
+        <div class="ui success message" th:unless="${#strings.isEmpty(message)}">
+            <i class="close icon"></i>
+            <div class="header">提示:</div>
+            <p th:text="${message}">恭喜，操作成功！</p>
+        </div>
     </div>
 </div>
 
@@ -228,6 +143,34 @@
     });
     $('.ui.dropdown').dropdown({
         on: 'hover'
+    });
+    // 关闭信息提示
+    $('.message .close').on('click', function () {
+        $(this).closest('.message').transition('fade');
+    })
+
+    function page(obj) {
+        $("[name='page']").val($(obj).data("page"));
+        loaddata();
+    }
+
+    // 加载表单数据
+    $("#search-btn").click(function () {
+        $("[name='page']").val(0);
+        loaddata();
+    });
+
+    function loaddata() {
+        $("#table-container").load(/*[[@{admin/blogs/search}]]*/"/admin/blogs/search", {
+            title: $("[name='title']").val(),
+            typeId: $("[name='typeId']").val(),
+            recommend: $("[name='recommend']").prop('checked'),
+            page: $("[name='page']").val()
+        });
+    }
+
+    $('#clear-btn').click(function () {
+        $('#clear-select').dropdown('clear');
     });
 </script>
 </body>

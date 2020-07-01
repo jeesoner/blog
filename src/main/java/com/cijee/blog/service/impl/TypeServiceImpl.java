@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -20,7 +21,7 @@ import java.util.Optional;
 @Transactional
 public class TypeServiceImpl implements TypeService {
 
-    private TypeRepository typeRepository;
+    private final TypeRepository typeRepository;
 
     public TypeServiceImpl(TypeRepository typeRepository) {
         this.typeRepository = typeRepository;
@@ -51,7 +52,7 @@ public class TypeServiceImpl implements TypeService {
     public Type updateType(Long id, Type type) {
         Type t = typeRepository.findById(id).get();
         if (t == null) {
-            throw new NotFoundException("不存在该类型");
+            throw new NotFoundException("该分类不存在");
         }
         BeanUtils.copyProperties(type, t);
         return typeRepository.save(t);
@@ -60,5 +61,10 @@ public class TypeServiceImpl implements TypeService {
     @Override
     public void removeType(Long id) {
         typeRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Type> listType() {
+        return typeRepository.findAll();
     }
 }

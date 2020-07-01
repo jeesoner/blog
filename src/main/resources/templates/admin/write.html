@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>写文章</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="../../static/lib/editormd/css/editormd.min.css">
     <link rel="stylesheet" href="../../static/css/me.css">
 </head>
@@ -36,21 +35,25 @@
         <i class="sidebar icon"></i>
     </a>
 </nav>
-<div class="ui top attached tabular menu">
-    <div class="ui container">
-        <a href="#" class="item active">写文章</a>
-        <a href="#" class="item">所有文章</a>
-    </div>
+
+<div class="ui attached pointing menu">
+    <ui class="ui container">
+        <div class="right menu">
+            <a th:href="@{/admin/blogs/input}" class="active teal item">写博客</a>
+            <a th:href="@{/admin/blogs}" class="item">博客列表</a>
+        </div>
+    </ui>
 </div>
 
 <!--所有文章-->
-<div class="m-padded-tb-large m-container-small">
+<div class="m-padded-tb-large container">
     <div class="ui container">
-        <form action="#" method="post" class="ui form">
+        <form id="blog-form" th:action="@{/admin/blogs}" method="post" class="ui form">
+            <input type="hidden" name="published">
             <div class="required field">
                 <div class="ui left labeled input">
                     <div class="ui compact selection teal basic dropdown label">
-                        <input type="hidden" value="原创">
+                        <input type="hidden" name="flag">
                         <i class="dropdown icon"></i>
                         <div class="text">原创</div>
                         <div class="menu">
@@ -63,83 +66,46 @@
                 </div>
             </div>
 
-            <div class="ui field">
+            <div class="required ui field">
                 <div id="md-content" style="z-index: 1 !important;">
-                    <textarea  name="content" placeholder="文章内容" style="display: none;">
-                        [TOC]
-
-#### Disabled options
-
-- TeX (Based on KaTeX);
-- Emoji;
-- Task lists;
-- HTML tags decode;
-- Flowchart and Sequence Diagram;
-
-#### Editor.md directory
-
-    editor.md/
-            lib/
-            css/
-            scss/
-            tests/
-            fonts/
-            images/
-            plugins/
-            examples/
-            languages/
-            editormd.js
-            ...
-
-```html
-&lt;!-- English --&gt;
-&lt;script src="../dist/js/languages/en.js"&gt;&lt;/script&gt;
-
-&lt;!-- 繁體中文 --&gt;
-&lt;script src="../dist/js/languages/zh-tw.js"&gt;&lt;/script&gt;
-```
-                    </textarea>
+                    <textarea  name="content" placeholder="文章内容" style="display: none;"></textarea>
                 </div>
             </div>
 
             <div class="two fields">
-                <div class="field">
+                <div class="required field">
                     <div class="ui left labeled input">
                         <label class="ui compact teal basic label">分类</label>
                         <div class="ui fluid selection dropdown">
-                            <input class="hidden" name="type">
+                            <input type="hidden" name="type.id">
                             <i class="dropdown icon"></i>
                             <div class="default text">分类</div>
                             <div class="menu">
-                                <div class="item" data-value="1">文章</div>
-                                <div class="item" data-value="2">笔记</div>
-                                <div class="item" data-value="3">想法</div>
-                                <div class="item" data-value="4">极客</div>
+                                <div th:each="type : ${types}" class="item" th:data-value="${type.id}" th:text="${type.name}"></div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="field">
+                    <!-- 搜索选择标签 -->
                     <div class="ui left labeled input">
                         <label class="ui compact teal basic label">标签</label>
                         <div class="ui fluid selection multiple search dropdown">
-                            <input class="hidden" name="tag">
+                            <input type="hidden" name="tagIds">
                             <i class="dropdown icon"></i>
                             <div class="default text">标签</div>
                             <div class="menu">
-                                <div class="item" data-value="1">Java</div>
-                                <div class="item" data-value="2">算法</div>
-                                <div class="item" data-value="3">框架</div>
+                                <div th:each="tag : ${tags}" class="item" th:data-value="${tag.id}" th:text="${tag.name}"></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="field">
+            <div class="required field">
                 <div class="ui left labeled input">
                     <label class="ui teal basic label">图片</label>
-                    <input type="text" name="indexPicture" placeholder="图片引用地址">
+                    <input type="text" name="cover" placeholder="图片引用地址">
                 </div>
             </div>
 
@@ -152,8 +118,8 @@
                 </div>
                 <div class="field">
                     <div class="ui checkbox">
-                        <input type="checkbox" id="shareinfo" name="shareinfo" class="hidden">
-                        <label for="shareinfo">转载声明</label>
+                        <input type="checkbox" id="shareStatement" name="shareStatement" class="hidden">
+                        <label for="shareStatement">转载声明</label>
                     </div>
                 </div>
                 <div class="field">
@@ -164,18 +130,19 @@
                 </div>
                 <div class="field">
                     <div class="ui checkbox">
-                        <input type="checkbox" id="comment" name="comment" class="hidden">
-                        <label for="comment">评论</label>
+                        <input type="checkbox" id="commentable" name="commentable" class="hidden">
+                        <label for="commentable">评论</label>
                     </div>
                 </div>
             </div>
 
+            <!--显示错误提示信息-->
             <div class="ui error message"></div>
 
             <div class="ui right aligned container">
                 <button type="button" class="ui button" onclick="window.history.go(-1)">返回</button>
-                <button class="ui secondary button">保存</button>
-                <button class="ui teal button">发布</button>
+                <button type="button" id="save-btn" class="ui secondary button">保存</button>
+                <button type="button" id="publish-btn" class="ui teal button">发布</button>
             </div>
         </form>
     </div>
@@ -199,7 +166,7 @@
             width   : "100%",
             height  : 640,
             syncScrolling : "single",
-            path    : "@{/lib/editormd/lib/}"
+            path    : /**/"/lib/editormd/lib/"
         });
     });
     $('.menu.toggle').click(function () {
@@ -214,24 +181,39 @@
                 identifier: 'title',
                 rules: [{
                     type: 'empty',
-                    prompt: '标题 : 请输入文章标题'
+                    prompt: '标题 : 请输入博客标题'
                 }]
             },
             content: {
                 identifier: 'content',
                 rules: [{
                     type: 'empty',
-                    prompt: '文章内容 : 文章内容不能为空'
+                    prompt: '文章内容 : 博客内容不能为空'
                 }]
             },
-            type: {
-                identifier: 'type',
+            typeId: {
+                identifier: 'typeId',
                 rules: [{
                     type: 'empty',
-                    prompt: '分类 : 请选择文章分类'
+                    prompt: '分类 : 请选择博客分类'
+                }]
+            },
+            cover: {
+                identifier: 'cover',
+                rules: [{
+                    type: 'empty',
+                    prompt: '图片 : 请输入博客图片引用地址'
                 }]
             },
         }
+    });
+    $("#save-btn").click(function () {
+        $("[name='published']").val(false);
+        $("#blog-form").submit();
+    });
+    $("#publish-btn").click(function () {
+        $("[name='published']").val(true);
+        $("#blog-form").submit();
     });
 </script>
 </body>
