@@ -97,10 +97,10 @@
                 <td th:text="${blog.title}"></td>
                 <td th:text="${blog.type.name}"></td>
                 <td th:text="${blog.recommend} ? '是' : '否'">是</td>
-                <td th:text="${#dates.format(blog.createdTime, 'yyyy-MM-dd HH:mm')}"></td>
-                <td th:text="${blog.published == 0 ? '草稿' : '发布'}"></td>
+                <td th:text="${#dates.format(blog.updatedTime, 'yyyy-MM-dd HH:mm')}"></td>
+                <td th:text="${blog.published} ? '发布' : '草稿'"></td>
                 <td>
-                    <a th:href="@{/admin/blogs/{id}/edit(id=${blog.id})}" class="ui mini teal button">编辑</a>
+                    <a th:href="@{/admin/blogs/{id}/write(id=${blog.id})}" class="ui mini teal button">编辑</a>
                     <a th:href="@{/admin/blogs/{id}/delete(id=${blog.id})}" class="ui mini red button">删除</a>
                 </td>
             </tr>

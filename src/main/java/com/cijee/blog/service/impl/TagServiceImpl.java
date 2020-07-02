@@ -36,7 +36,7 @@ public class TagServiceImpl implements TagService {
 
     @Override
     public Tag getTag(Long id) {
-        return tagRepository.findById(id).get();
+        return tagRepository.findById(id).orElse(null);
     }
 
     @Override
@@ -74,7 +74,7 @@ public class TagServiceImpl implements TagService {
 
     @Override
     public Tag updateTag(Long id, Tag tag) {
-        Tag t = tagRepository.findById(id).get();
+        Tag t = tagRepository.findById(id).orElse(null);
         if (t == null) {
             throw new NotFoundException("该标签不存在");
         }

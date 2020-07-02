@@ -38,7 +38,7 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public Blog getBlog(Long id) {
-        return blogRepository.findById(id).get();
+        return blogRepository.findById(id).orElse(null);
     }
 
     @Override
@@ -73,12 +73,15 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public Blog updateBlog(Long id, Blog blog) {
-        Blog b = blogRepository.findById(id).get();
+        Blog b = blogRepository.findById(id).orElse(null);
         if (b == null) {
             throw new NotFoundException("该博客不存在");
         }
-        BeanUtils.copyProperties(blog, b);
-        return blogRepository.save(b);
+        blog.setUpdatedTime(new Date());
+        blog.setCreatedTime(b.getCreatedTime());
+        blog.setUser(b.getUser());
+        blog.setViews(b.getViews());
+        return blogRepository.save(blog);
     }
 
     @Override

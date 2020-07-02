@@ -34,7 +34,7 @@ public class TypeServiceImpl implements TypeService {
 
     @Override
     public Type getType(Long id) {
-        return typeRepository.findById(id).get();
+        return typeRepository.findById(id).orElse(null);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class TypeServiceImpl implements TypeService {
 
     @Override
     public Type updateType(Long id, Type type) {
-        Type t = typeRepository.findById(id).get();
+        Type t = typeRepository.findById(id).orElse(null);
         if (t == null) {
             throw new NotFoundException("该分类不存在");
         }

@@ -3,7 +3,7 @@
 <head th:replace="admin/common :: head(~{::title})">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>分类新增</title>
+    <title>标签新增</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="../../static/lib/editormd/css/editormd.min.css">
@@ -54,7 +54,7 @@
             <div class="required field">
                 <div class="ui left labeled input">
                     <label class="ui teal basic label">名称</label>
-                    <input type="text" name="name" placeholder="分类名称" th:value="*{name}">
+                    <input type="text" name="name" placeholder="标签名称" th:value="*{name}">
                 </div>
             </div>
 
@@ -126,7 +126,7 @@
                 identifier: 'name',
                 rules: [{
                     type: 'empty',
-                    prompt: '请输入分类名称'
+                    prompt: '请输入标签名称'
                 }]
             }
         }
