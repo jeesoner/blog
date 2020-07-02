@@ -20,16 +20,18 @@
     <div class="ui container">
         <div class="ui inverted stackable secondary menu">
             <h2 class="ui teal header item">Blog</h2>
-            <a href="#" class="m-item item m-mobile-hide"><i class="fort awesome icon"></i>首页</a>
-            <a href="#" class="m-item item m-mobile-hide"><i class="list ul icon"></i>分类</a>
-            <a href="#" class="m-item item m-mobile-hide"><i class="tags icon"></i>标签</a>
-            <a href="#" class="m-item item m-mobile-hide"><i class="archive icon"></i>归档</a>
-            <a href="#" class="m-item item m-mobile-hide"><i class="info icon"></i>关于</a>
+            <a th:href="@{/}" class="m-item item m-mobile-hide"><i class="fort awesome icon"></i>首页</a>
+            <a th:href="@{/types}" class="m-item item m-mobile-hide"><i class="list ul icon"></i>分类</a>
+            <a th:href="@{/tags}" class="m-item item m-mobile-hide"><i class="tags icon"></i>标签</a>
+            <a th:href="@{/archives}" class="m-item item m-mobile-hide"><i class="archive icon"></i>归档</a>
+            <a th:href="@{/about}" class="m-item item m-mobile-hide"><i class="info icon"></i>关于</a>
             <div class="right m-item item m-mobile-hide m-padded-tb-big">
-                <div class="ui icon inverted transparent input">
-                    <input type="text" placeholder="搜索"/>
-                    <i class="search link icon"></i>
-                </div>
+                <form name="search" th:action="@{/search}" method="post" target="_blank">
+                    <div class="ui icon inverted transparent input">
+                        <input th:value="${query}" type="text" name="query" placeholder="搜索"/>
+                        <i onclick="document.forms['search'].submit()" class="search link icon"></i>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

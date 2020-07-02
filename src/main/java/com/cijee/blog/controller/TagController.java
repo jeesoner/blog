@@ -31,7 +31,7 @@ public class TagController {
     public String tags(@RequestParam(defaultValue = "0", required = false) Integer page,
                        @RequestParam(defaultValue = "10", required = false) Integer size,
                        Model model) {
-        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.ASC, "id"));
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "id"));
         model.addAttribute("page", tagService.listTag(pageable));
         return "admin/tags";
     }

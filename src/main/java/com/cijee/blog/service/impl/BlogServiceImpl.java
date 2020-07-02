@@ -8,7 +8,9 @@ import com.cijee.blog.repository.BlogRepository;
 import com.cijee.blog.service.BlogService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,11 +38,24 @@ public class BlogServiceImpl implements BlogService {
         this.blogRepository = blogRepository;
     }
 
+    /**
+     * 获取单个Blog对象
+     *
+     * @param id 主键
+     * @return 查询结果，查询不到返回null
+     */
     @Override
     public Blog getBlog(Long id) {
         return blogRepository.findById(id).orElse(null);
     }
 
+    /**
+     * 根据查询的参数动态拼接SQL，获取分页结果
+     *
+     * @param pageable 分页参数
+     * @param blog 查询参数
+     * @return 分页结果
+     */
     @Override
     public Page<Blog> listBlog(Pageable pageable, BlogParam blog) {
 
@@ -63,6 +78,47 @@ public class BlogServiceImpl implements BlogService {
         }, pageable);
     }
 
+    /**
+     * 获取博客分页
+     *
+     * @param pageable 分页参数
+     * @return 分页结果
+     */
+    @Override
+    public Page<Blog> listBlog(Pageable pageable) {
+        return blogRepository.findAll(pageable);
+    }
+
+    /**
+     * 获取搜索分页结果
+     *
+     * @param query 待查询的关键字
+     * @param pageable 参数参数
+     * @return 分页集合
+     */
+    @Override
+    public Page<Blog> listBlog(String query, Pageable pageable) {
+        return blogRepository.findByQuery("%" + query + "%", pageable);
+    }
+
+    /**
+     * 获取热门推荐
+     *
+     * @param topSize 条数
+     * @return 博客集合
+     */
+    @Override
+    public List<Blog> listRecommendBlogTop(Integer topSize) {
+        Pageable pageable = PageRequest.of(0, topSize, Sort.by(Sort.Direction.DESC, "updatedTime"));
+        return blogRepository.findTop(pageable);
+    }
+
+    /**
+     * 保存博客
+     *
+     * @param blog 博客对象
+     * @return 保存后的结果
+     */
     @Override
     public Blog saveBlog(Blog blog) {
         blog.setCreatedTime(new Date());
@@ -71,12 +127,21 @@ public class BlogServiceImpl implements BlogService {
         return blogRepository.save(blog);
     }
 
+    /**
+     * 更新博客
+     *
+     * @param id 主键
+     * @param blog 旧的博客对象
+     * @return 新的博客对象
+     */
     @Override
     public Blog updateBlog(Long id, Blog blog) {
         Blog b = blogRepository.findById(id).orElse(null);
         if (b == null) {
             throw new NotFoundException("该博客不存在");
         }
+        // 将数据库中查到的博客对象的一些字段赋值到新的博客对象中
+        // 因为直接更新的话，会导致新的对象会覆盖数据库中无需修改的那些字段
         blog.setUpdatedTime(new Date());
         blog.setCreatedTime(b.getCreatedTime());
         blog.setUser(b.getUser());
@@ -84,6 +149,10 @@ public class BlogServiceImpl implements BlogService {
         return blogRepository.save(blog);
     }
 
+    /**
+     * 删除博客
+     * @param id 主键
+     */
     @Override
     public void removeBlog(Long id) {
         blogRepository.deleteById(id);

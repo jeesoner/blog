@@ -45,7 +45,7 @@ public class BlogController {
     public String blogs(@RequestParam(defaultValue = "0", required = false) Integer page,
                         @RequestParam(defaultValue = "10", required = false) Integer size,
                         BlogParam blogParam, Model model) {
-        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.ASC, "id"));
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "id"));
         model.addAttribute("page", blogService.listBlog(pageable, blogParam));
         model.addAttribute("types", typeService.listType());
         return LIST;
@@ -64,7 +64,7 @@ public class BlogController {
     public String search(@RequestParam(defaultValue = "0", required = false) Integer page,
                          @RequestParam(defaultValue = "10", required = false) Integer size,
                          BlogParam blog, Model model) {
-        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.ASC, "id"));
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "id"));
         model.addAttribute("page", blogService.listBlog(pageable, blog));
         return "admin/blogs :: blogList";
     }
