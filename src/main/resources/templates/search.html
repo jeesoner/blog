@@ -100,7 +100,7 @@
                     </a>
                 </div>
                 <div class="right aligned column">
-                    <a class="ui animated button" tabindex="0" th:href="@{/(page=${page.number}+1)}" th:unless="${page.first}">
+                    <a class="ui animated button" tabindex="0" th:href="@{/(page=${page.number}+1)}" th:unless="${page.last}">
                         <div class="visible content">下一页</div>
                         <div class="hidden content">
                             <i class="right arrow icon"></i>

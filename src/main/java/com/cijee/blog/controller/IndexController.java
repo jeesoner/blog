@@ -46,34 +46,14 @@ public class IndexController {
      */
     @GetMapping({"/", "/index"})
     public String index(@RequestParam(defaultValue = "0", required = false) Integer page,
-                        @RequestParam(defaultValue = "10", required = false) Integer size,
+                        @RequestParam(defaultValue = "8", required = false) Integer size,
                         Model model) {
-        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.ASC, "id"));
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "updatedTime"));
         model.addAttribute("page", blogService.listBlog(pageable));
         model.addAttribute("types", typeService.listTypeTop(6));
         model.addAttribute("tags", tagService.listTagTop(10));
         model.addAttribute("recommendBlogs", blogService.listRecommendBlogTop(8));
         return "index";
-    }
-
-    /**
-     * 分类页面
-     *
-     * @return 分类页面视图
-     */
-    @GetMapping("/types")
-    public String types() {
-        return "types";
-    }
-
-    /**
-     * 标签页面
-     *
-     * @return 标签页面视图
-     */
-    @GetMapping("/tags")
-    public String tags() {
-        return "tags";
     }
 
     /**

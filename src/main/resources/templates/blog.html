@@ -48,7 +48,7 @@
                     </div>
                 </div>
                 <div class="item">
-                    <i class="calendar icon"></i>&ensp;<span th:text="${blog.updatedTime}"></span>
+                    <i class="calendar icon"></i>&ensp;<span th:text="${#dates.format(blog.updatedTime, 'yyyy-MM-dd')}"></span>
                 </div>
                 <div class="item">
                     <i class="eye icon"></i>&ensp;<span th:text="${blog.views}"></span>
