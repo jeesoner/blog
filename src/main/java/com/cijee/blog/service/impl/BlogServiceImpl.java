@@ -6,6 +6,7 @@ import com.cijee.blog.model.po.Blog;
 import com.cijee.blog.model.po.Type;
 import com.cijee.blog.repository.BlogRepository;
 import com.cijee.blog.service.BlogService;
+import com.cijee.blog.util.MarkdownUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -40,13 +41,20 @@ public class BlogServiceImpl implements BlogService {
 
     /**
      * 获取单个Blog对象
+     * 将Blog的Markdown内容转换成Html格式
      *
      * @param id 主键
      * @return 查询结果，查询不到返回null
      */
     @Override
     public Blog getBlog(Long id) {
-        return blogRepository.findById(id).orElse(null);
+        Blog blog = blogRepository.findById(id).orElse(null);
+        if (blog == null) {
+            throw new NotFoundException("该博客不存在");
+        }
+        String content = blog.getContent();
+        blog.setContent(MarkdownUtils.markdownToHtmlExtensions(content));
+        return blog;
     }
 
     /**
