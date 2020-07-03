@@ -24,6 +24,7 @@ public class Comment {
     private String avatar; // 头像
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdTime;
+    private boolean adminComment; // 是否管理员评论
 
     @ManyToOne
     private Blog blog;
@@ -102,5 +103,13 @@ public class Comment {
 
     public void setParentComment(Comment parentComment) {
         this.parentComment = parentComment;
+    }
+
+    public boolean isAdminComment() {
+        return adminComment;
+    }
+
+    public void setAdminComment(boolean adminComment) {
+        this.adminComment = adminComment;
     }
 }

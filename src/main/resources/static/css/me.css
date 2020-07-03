@@ -141,6 +141,10 @@ body {
     color: #333 !important;
 }
 
+.m-blue {
+    color: #0eb0c9 !important;
+}
+
 /*---shadow---*/
 .m-shadow-small {
     -webkit-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;

@@ -1,7 +1,7 @@
 package com.cijee.blog.controller;
 
-import com.cijee.blog.model.param.BlogParam;
 import com.cijee.blog.service.BlogService;
+import com.cijee.blog.service.CommentService;
 import com.cijee.blog.service.TagService;
 import com.cijee.blog.service.TypeService;
 import org.springframework.data.domain.PageRequest;
@@ -27,10 +27,13 @@ public class IndexController {
 
     private final TagService tagService;
 
-    public IndexController(BlogService blogService, TypeService typeService, TagService tagService) {
+    private final CommentService commentService;
+
+    public IndexController(BlogService blogService, TypeService typeService, TagService tagService, CommentService commentService) {
         this.blogService = blogService;
         this.typeService = typeService;
         this.tagService = tagService;
+        this.commentService = commentService;
     }
 
     /**
