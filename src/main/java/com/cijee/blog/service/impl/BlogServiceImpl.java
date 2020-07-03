@@ -17,9 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.criteria.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author cijee
@@ -127,6 +125,23 @@ public class BlogServiceImpl implements BlogService {
     public List<Blog> listRecommendBlogTop(Integer topSize) {
         Pageable pageable = PageRequest.of(0, topSize, Sort.by(Sort.Direction.DESC, "updatedTime"));
         return blogRepository.findTop(pageable);
+    }
+
+    @Override
+    public Map<String, List<Blog>> archiveBlog() {
+        // 获取所有的年份
+        List<String> years = blogRepository.findGroupByYear();
+        // 用LinkedHashMap保证读取的顺序
+        Map<String, List<Blog>> map = new LinkedHashMap<>();
+        for (String year : years) {
+            map.put(year, blogRepository.findByYear(year));
+        }
+        return map;
+    }
+
+    @Override
+    public Long countBlog() {
+        return blogRepository.count();
     }
 
     /**

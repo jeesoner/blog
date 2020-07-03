@@ -57,16 +57,6 @@ public class IndexController {
     }
 
     /**
-     * 归档页面
-     *
-     * @return 归档页面视图
-     */
-    @GetMapping("/archives")
-    public String archives() {
-        return "archives";
-    }
-
-    /**
      * 关于页面
      *
      * @return 关于页面视图
