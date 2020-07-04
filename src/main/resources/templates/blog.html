@@ -77,7 +77,7 @@
             </div>
 
             <!--赞赏-->
-            <div>
+            <div th:if="${blog.appreciation}">
                 <div class="ui center aligned basic segment">
                     <button id="payButton" class="ui orange basic circular button">赞赏</button>
                 </div>
@@ -100,7 +100,7 @@
             </div>
         </div>
         <!--博客信息-->
-        <div class="ui bottom positive attached message">
+        <div class="ui bottom positive attached message" th:if="${blog.shareStatement}">
             <div class="ui middle aligned grid">
                 <div class="eleven wide column">
                     <ui class="list">
@@ -117,7 +117,7 @@
             </div>
         </div>
         <!--留言-->
-        <div class="ui segment">
+        <div class="ui segment" th:if="${blog.commentable}">
             <!--留言列表-->
             <div id="comment-container" class="ui teal segment">
                 <div th:fragment="commentList">
@@ -426,7 +426,7 @@
     });
 
     var serurl = "127.0.0.1:8080";
-    var url = "/*[[@{/blog/{id}(id=${blog.id})}]]*/";
+    var url = /*[[@{/blog/{id}(id=${blog.id})}]]*/"";
     var qrcode = new QRCode("qrcode", {
         text: serurl+url,
         width: 110,

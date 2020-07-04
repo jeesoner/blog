@@ -45,28 +45,25 @@
             <div class="five wide column animated fadeInRightBig">
                 <div class="ui top attached segment">
                     <div class="ui header">关于我</div>
-                    <p class="m-text">cijee，一枚后端小白，目前大三学生</p>
-                    <p class="m-text">Acmer</p>
+                    <p class="m-text" th:utext="#{author.description}">
                 </div>
                 <div class="ui attached segment">
                     <div class="ui orange basic label">编程</div>
-                    <div class="ui orange basic label">写作</div>
-                    <div class="ui orange basic label">唱跳</div>
-                    <div class="ui orange basic label">rap</div>
+                    <div class="ui orange basic label">听音乐</div>
+                    <div class="ui orange basic label">看书</div>
                 </div>
                 <div class="ui attached segment">
                     <div class="ui teal basic label m-margin-tb-tiny">Java</div>
-                    <div class="ui teal basic label m-margin-tb-tiny">MySQL</div>
+                    <div class="ui teal basic label m-margin-tb-tiny">Linux</div>
                     <div class="ui teal basic label m-margin-tb-tiny">Spring</div>
-                    <div class="ui teal basic label m-margin-tb-tiny">SpringBoot</div>
-                    <div class="ui teal basic label m-margin-tb-tiny">...</div>
+                    <div class="ui teal basic label m-margin-tb-tiny">....</div>
                 </div>
                 <div class="ui bottom attached segment">
-                    <a href="#" class="ui circular icon button"><i class="github icon"></i></a>
+                    <a th:href="#{autho.github}" target="_blank" class="ui circular icon button"><i class="github icon"></i></a>
                     <a href="#" class="ui wechat circular icon button"><i class="wechat icon"></i></a>
                 </div>
                 <div class="ui wechat-oa flowing popup transition hidden">
-                    <img src="../static/images/wechat.jpg" alt="" class="ui rounded fluid image" style="width: 100px">
+                    <img src="../static/images/wechat.jpg" th:src="@{#{}" alt="" class="ui rounded fluid image" style="width: 100px">
                 </div>
             </div>
         </div>
@@ -116,8 +113,10 @@
     </div>
 </footer>
 
+<!--/*/<th:block th:replace="common :: script">/*/-->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+<!--/*/</th:block>/*/-->
 
 <script>
     $('.menu.toggle').click(function () {

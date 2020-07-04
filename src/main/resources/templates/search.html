@@ -40,7 +40,7 @@
             <!--两列-->
             <div class="ui middle aligned two column grid">
                 <div class="column">
-                    <h3 class="ui teal header">搜索结果</h3>
+                    <h3 class="ui teal header" th:text="${page.totalElements}==0 ? '搜索不到你要的结果' : '搜索结果'">搜索结果</h3>
                 </div>
                 <div class="right aligned column">
                     共&ensp;<h3 class="ui orange header m-text-thin m-inline-block" th:text="${page.totalElements}">14</h3>&ensp;篇
@@ -49,7 +49,7 @@
         </div>
 
         <!--文章列表-->
-        <div class="ui teal top attached segment animated bounceInUp">
+        <div class="ui teal top attached segment animated bounceInUp" th:if="${page.totalElements}>0">
             <!--文章-->
             <div th:each="blog : ${page.content}" class="ui vertical segment m-padded m-padded-tb-big">
                 <div class="ui middle aligned stackable mobile reversed grid">
@@ -112,7 +112,15 @@
     </div>
     </div>
 </div>
-
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <!--底部-->
 <footer th:replace="common :: footer" class="ui inverted vertical segment m-padded-tb-big">
     <!--信息-->
@@ -156,8 +164,10 @@
     </div>
 </footer>
 
+<!--/*/<th:block th:replace="common :: script">/*/-->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+<!--/*/</th:block>/*/-->
 
 <script>
     $('.menu.toggle').click(function () {

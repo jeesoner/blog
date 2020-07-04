@@ -57,16 +57,6 @@ public class IndexController {
     }
 
     /**
-     * 关于页面
-     *
-     * @return 关于页面视图
-     */
-    @GetMapping("/about")
-    public String about() {
-        return "about";
-    }
-
-    /**
      * 搜索
      *
      * @param page 页码
@@ -89,6 +79,12 @@ public class IndexController {
     public String blogs(@PathVariable Long id, Model model) {
         model.addAttribute("blog", blogService.getBlog(id));
         return "blog";
+    }
+
+    @GetMapping("/footer/newBlog")
+    public String newBlogs(Model model) {
+        model.addAttribute("newBlogs", blogService.listRecommendBlogTop(3));
+        return "common :: newBlogsList";
     }
 
 }
