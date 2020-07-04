@@ -38,11 +38,11 @@ public class TypeShowController {
      */
     @GetMapping({"types", "/types/{id}"})
     public String types(@RequestParam(defaultValue = "0", required = false) Integer page,
-                        @RequestParam(defaultValue = "1", required = false) Integer size,
+                        @RequestParam(defaultValue = "8", required = false) Integer size,
                         @PathVariable(required = false) Long id, Model model) {
         Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "updatedTime"));
         List<Type> types = typeService.listTypeTop(1000);
-        if (id == null || id.equals(-1)) {
+        if (id == null && types.size() != 0) {
             id = types.get(0).getId();
         }
         BlogParam blogParam = new BlogParam();

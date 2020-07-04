@@ -4,6 +4,7 @@ import com.cijee.blog.model.po.Comment;
 import com.cijee.blog.model.po.User;
 import com.cijee.blog.service.BlogService;
 import com.cijee.blog.service.CommentService;
+import com.cijee.blog.util.AvatarUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,9 +24,6 @@ public class CommentController {
     private final CommentService commentService;
 
     private final BlogService blogService;
-
-    @Value("${comment.avatar}")
-    private String avatar;
 
     public CommentController(CommentService commentService, BlogService blogService) {
         this.commentService = commentService;
@@ -50,12 +48,14 @@ public class CommentController {
         Long blogId = comment.getBlog().getId();
         comment.setBlog(blogService.getBlog(blogId));
         User user = (User) session.getAttribute("user");
+        // 管理员评论
         if (user != null) {
             comment.setAvatar(user.getAvatar());
             comment.setAdminComment(true);
             comment.setNickName(user.getNickName());
-        } else {
-            comment.setAvatar(avatar);
+        } else { // 游客评论
+            // 给游客设置随机头像
+            comment.setAvatar(AvatarUtils.getRandomAvatar());
         }
         commentService.saveComment(comment);
         return "redirect:/comments/" + blogId;

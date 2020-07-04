@@ -39,7 +39,7 @@
         <div class="ui grid stackable">
             <!--图片-->
             <div class="eleven wide column animated fadeInLeftBig">
-                <img src="https://picsum.photos/id/1/800/600" alt="" class="ui image rounded">
+                <img src="https://picsum.photos/id/1/800/600" th:src="@{#{author.wallpaper}}" alt="" class="ui image rounded border" style="border: 5px solid #ddd;padding: 5px;background: #fff;">
             </div>
             <!--关于我-->
             <div class="five wide column animated fadeInRightBig">
@@ -63,12 +63,17 @@
                     <a href="#" class="ui wechat circular icon button"><i class="wechat icon"></i></a>
                 </div>
                 <div class="ui wechat-oa flowing popup transition hidden">
-                    <img src="../static/images/wechat.jpg" th:src="@{#{}" alt="" class="ui rounded fluid image" style="width: 100px">
+                    <img src="../static/images/wechat.jpg" th:src="@{#{author.wechat.account}}" alt="" class="ui rounded fluid image" style="width: 100px">
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<br>
+<br>
+<br>
+<br>
 
 <!--底部-->
 <footer th:replace="common :: footer" class="ui inverted vertical segment m-padded-tb-big">
@@ -122,9 +127,9 @@
     $('.menu.toggle').click(function () {
         $('.m-item').toggleClass('m-mobile-hide');
     });
-    $('.wechat').popup({
+    $('.ui.wechat.circular').popup({
         popup : $('.wechat-oa'),
-        on: 'click',
+        on: 'hover',
         position: 'bottom center'
     });
 </script>

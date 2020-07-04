@@ -111,7 +111,7 @@
                     </ui>
                 </div>
                 <div class="five wide column">
-                    <img src="../static/images/wechat.jpg" th:src="@{/images/wechat.jpg}" alt="" class="ui rounded bordered image right floated"
+                    <img src="../static/images/wechat.jpg" th:src="@{#{author.wechat.account}}" alt="" class="ui rounded bordered image right floated"
                          style="width: 100px !important;">
                 </div>
             </div>
@@ -272,7 +272,7 @@
 </div>
 <div class="ui wechat-qr flowing popup transition hidden" style="width: 100px !important;">
     <div class="image">
-        <img src="../static/images/wechat.jpg" th:src="@{/images/wechat.jpg}" alt="阅读" class="ui rounded bordered image"
+        <img src="../static/images/wechat.jpg" th:src="@{#{author.wechat.account}}" alt="阅读" class="ui rounded bordered image"
              style="width: 150px">
     </div>
 </div>
@@ -351,7 +351,7 @@
             email: {
                 identifier: 'email',
                 rules: [{
-                    type: 'empty',
+                    type: 'email',
                     prompt: '请输入你正确的邮箱'
                 }]
             }
