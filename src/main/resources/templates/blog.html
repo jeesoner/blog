@@ -85,12 +85,12 @@
                     <div class="ui orange basic label">
                         <div class="ui images" style="font-size: inherit !important;">
                             <div class="image">
-                                <img src="../static/images/wechat.jpg" th:src="@{/images/wechat.jpg}" alt="支付宝" class="ui rounded bordered image"
+                                <img src="../static/images/wechat.jpg" th:src="@{/images/alipay.jpg}" alt="支付宝" class="ui rounded bordered image"
                                      style="width: 120px">
                                 <div>支付宝</div>
                             </div>
                             <div class="image">
-                                <img src="../static/images/wechat.jpg" th:src="@{/images/wechat.jpg}" alt="微信" class="ui rounded bordered image"
+                                <img src="../static/images/wechat.jpg" th:src="@{/images/wechat.png}" alt="微信" class="ui rounded bordered image"
                                      style="width: 120px">
                                 <div>微信</div>
                             </div>
@@ -425,16 +425,6 @@
         position: 'left center'
     });
 
-    var serurl = "127.0.0.1:8080";
-    var url = /*[[@{/blog/{id}(id=${blog.id})}]]*/"";
-    var qrcode = new QRCode("qrcode", {
-        text: serurl+url,
-        width: 110,
-        height: 110,
-        colorDark : "#000000",
-        colorLight : "#ffffff",
-        correctLevel : QRCode.CorrectLevel.H
-    });
 </script>
 </body>
 </html>

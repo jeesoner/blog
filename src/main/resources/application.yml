@@ -1,3 +1,9 @@
 spring:
   profiles:
-    active: pro
+    active: prod
+  jpa:
+    properties:
+      hibernate.enable_lazy_load_no_trans: true
+  devtools:
+    restart:
+      enabled: false

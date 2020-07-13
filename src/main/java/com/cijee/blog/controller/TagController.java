@@ -39,7 +39,7 @@ public class TagController {
     @GetMapping("/tags/input")
     public String input(Model model) {
         model.addAttribute("tag", new Tag());
-        return "/admin/tags-input";
+        return "admin/tags-input";
     }
 
     @PostMapping("/tags")
@@ -83,7 +83,7 @@ public class TagController {
     @GetMapping("/tags/{id}/edit")
     public String edit(@PathVariable Long id, Model model) {
         model.addAttribute("tag", tagService.getTag(id));
-        return "/admin/tags-input";
+        return "admin/tags-input";
     }
 
     @GetMapping("/tags/{id}/delete")

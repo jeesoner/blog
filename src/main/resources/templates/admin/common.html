@@ -40,7 +40,11 @@
 <!--底部-->
 <footer th:fragment="footer" class="m-padded-tb-big m-container" style="text-align: center;">
     <!--版权所有-->
-    <p class="m-text-thin m-text-space m-opacity-tiny">Copyright © 2020 Blog designed by cijee</p>
+    <!--版权所有-->
+    <div class="m-text-thin m-text-space m-opacity-tiny">
+        <span th:text="#{blog.copyright}"></span>
+        <a href="http://www.beian.miit.gov.cn/" style="color: inherit;" th:text="#{blog.icp}"></a>
+    </div>
 </footer>
 
 </body>

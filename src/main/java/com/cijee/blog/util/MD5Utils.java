@@ -28,10 +28,6 @@ public class MD5Utils {
         }
         md5.update(str.getBytes());
         byte[] byteDigest = md5.digest();
-        for (byte b : byteDigest) {
-            System.out.print(b);
-        }
-        System.out.println();
         int i;
         StringBuffer sb = new StringBuffer("");
         for (int offset = 0; offset < byteDigest.length; offset++) {

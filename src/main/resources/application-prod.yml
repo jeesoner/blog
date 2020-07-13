@@ -1,20 +1,18 @@
 server:
-  address: 192.168.0.106
-  port: 80
+  port: 8080
+
 spring:
   thymeleaf:
     cache: true
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/blog?serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/blog?serverTimezone=UTC
     username: root
     password: "0000"
   jpa:
     hibernate:
       ddl-auto: none
     show-sql: false
-    properties:
-      hibernate.enable_lazy_load_no_trans: true
   devtools:
     restart:
       enabled: false

@@ -40,7 +40,7 @@ public class TypeController {
     @GetMapping("/types/input")
     public String input(Model model) {
         model.addAttribute("type", new Type());
-        return "/admin/types-input";
+        return "admin/types-input";
     }
 
     @PostMapping("/types")
@@ -84,7 +84,7 @@ public class TypeController {
     @GetMapping("/types/{id}/edit")
     public String edit(@PathVariable Long id, Model model) {
         model.addAttribute("type", typeService.getType(id));
-        return "/admin/types-input";
+        return "admin/types-input";
     }
 
     @GetMapping("/types/{id}/delete")

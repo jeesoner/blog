@@ -104,16 +104,6 @@
 <script src="../../static/lib/editormd/editormd.min.js" th:src="@{/lib/editormd/editormd.min.js}"></script>
 
 <script>
-    // 初始化markdown插件
-    var contentEditor;
-    $(function() {
-        contentEditor = editormd("md-content", {
-            width   : "100%",
-            height  : 640,
-            syncScrolling : "single",
-            path    : "@{/lib/editormd/lib/}"
-        });
-    });
     $('.menu.toggle').click(function () {
         $('.m-item').toggleClass('m-mobile-hide');
     });

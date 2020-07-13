@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../static/css/prism.css" th:href="@{/css/prism.css}">
     <link rel="stylesheet" href="../static/css/typo.css" th:href="@{/css/typo.css}">
     <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}">
-    <script src="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
+<!--    <script src="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>-->
 </head>
 <body>
 
@@ -80,7 +80,10 @@
         </div>
         <div class="ui inverted section divider"></div>
         <!--版权所有-->
-        <p class="m-text-thin m-text-space m-opacity-tiny" th:text="#{blog.copyright}">Copyright © 2020 Blog designed by cijee</p>
+        <div class="m-text-thin m-text-space m-opacity-tiny">
+            <span th:text="#{blog.copyright}"></span>
+            <a href="http://www.beian.miit.gov.cn/" style="color: inherit;" th:text="#{blog.icp}"></a>
+        </div>
     </div>
 </footer>
 
@@ -94,6 +97,7 @@
     <script type="text/javascript" th:inline="javascript">
         $('#newBlog-container').load(/*[[@{/footer/newBlog}]]*/"/footer/newBlog");
     </script>
+    <script type="text/javascript" color="255,0,0"opacity="0.5"count="99" src="../static/js/canvas-nest.js" th:src="@{/js/canvas-nest.js}"></script>
 </th:block>
 
 </body>
