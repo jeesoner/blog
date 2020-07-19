@@ -1,4 +1,4 @@
-<h1 style="text-align: center">Blog Space</h1>
+<h1 style="text-align: center">Blog</h1>
 
 #### 项目简介
 项目基于 Spring Boot 2.3.1、Spring、Spring MVC、Jpa、MySQL、Thymeleaf的个人博客系统。博客编辑支持Markdown语法，支持评论功能
